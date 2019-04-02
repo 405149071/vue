@@ -9,8 +9,15 @@
 <body>
     
     <div id="app">
+        <!--变量绑定-->
         <input type="text" v-model="message">
         <p> {{message}} </p>
+        <!--强制绑定-->
+        <img :src="imgurl" />
+        <!---绑定事件-->
+        <button v-on:click="myclick">按钮1</button>
+        <button @click="myclick">按钮2</button>
+        
     </div>
       
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -18,7 +25,13 @@
         var vm = new Vue({
             el:"#app",
             data:{
-                message:"Hello,Vue.js!"
+                message : "Hello,Vue.js!",
+                imgurl : "img/vue.png"
+            },
+            methods : {
+                myclick(){
+                    alert('绑定了事件');
+                }
             }
         })
         vm.message = '你好呀';
