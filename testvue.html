@@ -13,6 +13,7 @@
         <input type="text" v-model="message">
         <p> {{message}} </p>
         <!--强制绑定-->
+        <img v-bind:src="imgurl" />
         <img :src="imgurl" />
         <!---绑定事件-->
         <button v-on:click="myclick">按钮1</button>
