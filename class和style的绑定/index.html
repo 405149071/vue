@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            .aclass {
+                color : red;
+            }
+            .bclass {
+                color :blue;
+            }
+            .cclass {
+                font-size: 30px
+            }
+         </style>
+</head>
+<body>
+
+<!--
+    1. 理解
+    在应用界面中，某个元素的样式是变化的
+    class/style绑定的就是专门用来实现动态样式效果的技术
+    2. class绑定，:class = 'xxx'
+    xxx 是字符串
+    xxx 是对象
+    xxx 是数组
+    3. style 绑定
+    :style = "{ color : activeColor , fontSize : fontSize + 'px' }"
+-->
+
+
+
+        <div id="app">
+             <h2> class 绑定，:class = 'xxx' </h2>   
+             <p  class = "cclass" :class="a">xxx是字符串</p>  
+             <p :class="{aclass : isa , bclass : isb}">xxx是对象</p> 
+             <p :class=['aclass','cclass']>xxx是数组</p> 
+            
+             <button @click="update">更新</button> 
+
+             <p :style="{ color : activeColor , fontSize : fontSize + 'px' }">
+                style 值
+            </p>
+
+         </div>
+
+            
+              
+            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+            <script type="text/javascript">
+                var vm = new Vue({
+                    el:"#app",
+                    data:{
+                        a : 'aclass',
+                        isa : true,
+                        isb : false,
+                        activeColor : "yellow",
+                        fontSize : 40
+                    },
+                    methods:{
+                        update () {
+                            //console.log('aaaaa');
+                            this.isa = !this.isa
+                            this.isb = !this.isb
+                            this.activeColor = 'red'
+                            this.fontSize = 30
+                        }
+                    }
+                })
+            </script>
+        
+
+</body>
+</html>
