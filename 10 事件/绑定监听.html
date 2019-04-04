@@ -36,6 +36,7 @@
 
         </div>
         <!---阻止默认事件-->
+        <a href="http://www.baidu.com" @click= "gobaidu1">老方法阻止默认事件去百度</a>
         <a href="http://www.baidu.com" @click.prevent = "gobaidu">去百度</a>
     </div>
 
@@ -66,6 +67,10 @@
                 },
                 gobaidu(){
                     alert('点击了');
+                },
+                gobaidu1(event){
+                    event.preventDefault();
+                    alert('点击了')
                 }
             }
         })
