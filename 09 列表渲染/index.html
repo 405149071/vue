@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(p,index) in persons" :key="index">
+                {{index}}--{{p.name}}--{{p.age}}
+                --<button @click = "deletep(index)">删除</button>
+                --<button @click = "updatep(index,{name:'阿毛',age:40})">更新</button>
+            </li>
+
+        </ul>
+
+    </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                persons:[
+                    {name:"章三",age:18},
+                    {name:"李四",age:19},
+                    {name:"王五",age:17},
+                ]
+            },
+            methods : {
+                deletep(index){
+                    console.log(index)
+                    this.persons.splice(index,1)
+                },
+                updatep(index,newp){
+                    console.log(index)
+                    // this.persons[index] = newP  // vue根本就不知道 vue有变异方法实现了监听，直接改变数组是没有监听的
+                    this.persons.splice(index,1,newp)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
