@@ -38,6 +38,12 @@
         <!---阻止默认事件-->
         <a href="http://www.baidu.com" @click= "gobaidu1">老方法阻止默认事件去百度</a>
         <a href="http://www.baidu.com" @click.prevent = "gobaidu">去百度</a>
+
+        <br>
+        <h2>按键</h2>
+        <input type="text" @keyup="testkeycode"> //老的方法绑定按键 
+        <input type="text" @keyup.13="testkeycode"> //
+        <input type="text" @keyup.enter="testkeycode"> //
     </div>
 
    <script src="../js/vue.js"></script>
@@ -71,6 +77,11 @@
                 gobaidu1(event){
                     event.preventDefault();
                     alert('点击了')
+                },
+                testkeycode(event){
+                    if(event.keyCode == 13){
+                        alert(event.target.value)
+                    }
                 }
             }
         })
