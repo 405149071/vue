@@ -15,6 +15,10 @@
                 --<button @click = "updatep(index,{name:'阿毛',age:40})">更新</button>
             </li>
 
+            <h2>遍历对象里的内容</h2>
+            <ul>
+                    <li v-for="(item, key) in persons[1]" :key="key">{{key}}={{item}}</li>
+            </ul>
         </ul>
 
     </div>
