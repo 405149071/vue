@@ -7,13 +7,36 @@
     <title>Document</title>
 </head>
 <body>
+
+<style>
+    .red {
+        width: 400px;
+        height: 400px;
+        background-color: red;
+    }
+    .blue {
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+    }
+</style>
     <div id="app">
         <h2>绑定监听</h2>
         <button @click = "btnClick">无参数绑定</button>
         <button @click = "btnClick2('参数')">传参</button>
         <button @click = "btnClick3">使用event，默认就传</button>
         <button @click = "btnClick4('abcd',$event)">使用event，并且传入参数</button>
+        <h2>事件修饰符，阻止冒泡</h2>
 
+        <div id="outer" class = "red" @click = "outer">
+            <!--阻止冒泡事件-->
+            <div id="inner" class = "blue" @click.stop = "inner">
+
+            </div>
+
+        </div>
+        <!---阻止默认事件-->
+        <a href="http://www.baidu.com" @click.prevent = "gobaidu">去百度</a>
     </div>
 
    <script src="../js/vue.js"></script>
@@ -35,6 +58,15 @@
                 btnClick4(para,event){  
                     alert(para + ' ' + event.target.innerHTML)
                 },
+                outer(){
+                    alert("outer")
+                },
+                inner(){
+                    alert("inner")
+                },
+                gobaidu(){
+                    alert('点击了');
+                }
             }
         })
     </script>
