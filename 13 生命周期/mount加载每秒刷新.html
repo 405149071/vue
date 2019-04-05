@@ -9,7 +9,7 @@
 <body>
     
     <div id="app">
-            <button>卸载vm</button>
+            <button @click = "destroyVM">destroy vm</button>
             <p v-show="isShow">清明节</p>
     </div>
     
@@ -22,9 +22,19 @@
         },
         mounted() {
             //初始化显示之后立即调用
-            setInterval(() => {
+            this.intervalID = setInterval(() => {
+                console.log("------------")
                 this.isShow = !this.isShow
             }, 1000);
+        },
+        beforeDestroy() {
+            // 清除定时器 避免内存泄露
+            clearInterval(this.intervalID)
+        },
+        methods : {
+            destroyVM (){
+                this.$destroy()
+            }
         }
     })
     </script>
