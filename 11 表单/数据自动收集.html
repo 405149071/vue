@@ -7,6 +7,27 @@
     <title>Document</title>
 </head>
 <body>
+
+    <!---
+    1.vue对象的生命周期
+    1） 初始化显示
+    beforeCreate()
+    created()
+    beforeMount()
+    mounted()
+    2) 更新显示 this.xxx = value
+    beforeUpdate()
+    updated()
+    3) 销毁vue实例 vm.$destroy()
+    beforeDestroy()
+    destroyed()
+
+    2. 常用的生命周期方法
+    mounted():发送ajax请求,启动定时器等异步方法
+    beforeDestroy(): 做收尾工作，如：清洗定时器
+
+    
+    -->
     <div id="app">
         <form action="">
             姓名： <input v-model="userName" type="text" /><br>
