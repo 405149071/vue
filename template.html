@@ -10,17 +10,37 @@
         <div id="app">
                 <input type="text" v-model="message">
                 <p> {{message}} </p>
+                <div :page="page">{{page}}</div>
+            </div>
+
+            <div id="app2">
+                <input type="text" v-model="message">
+                <p> {{message2}} </p>
             </div>
               
             <script src="https://cdn.jsdelivr.net/npm/vue"></script>
             <script type="text/javascript">
-                var vm = new Vue({
+                var data = {
+                    message:"Hello,Vue.js!",
+                    message2:"2222222",
+                    page:8
+                }
+                var vm1 = new Vue({
                     el:"#app",
-                    data:{
-                        message:"Hello,Vue.js!"
-                    }
+                    data:data
                 })
-                vm.message = '你好呀';
+                data.message = '你好呀';
+                var vm2 = new Vue({
+                    el:"#app2",
+                    data:data,
+                    methods: {
+                        test(){
+                            alert("afafa");
+                        }
+                    },
+                })
+                vm2.message = "hihihihi"
+                vm2.test()
             </script>
 </body>
 </html>
