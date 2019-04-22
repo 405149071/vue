@@ -7,7 +7,67 @@
     <title>Document</title>
 </head>
 <body>
+
+    <link rel="stylesheet" href="../assets/css/amazeui.css">
+
+    <script type="text/javascript" src="../js/vue.min.js" ></script>
+    <script type="text/javascript" src="../js/vee-validate.min.js" ></script>
+    <script type="text/javascript" src="../js/zh_CN.js" ></script>
     
+    <form id = "app" action="" class="am-form">
+        
+        <div class="am-form-group" :class=" {'am-form-error': errors.has('username')}">
+          <input type="text" class="am-form-field" v-model="username" placeholder="用户名" v-validate="'required'" data-vv-as="用户名" name="username">
+          <div class="am-form-label"  v-show="errors.has('username')" v-cloak>{{ errors.first('username') }}</div>  
+        </div>
+
+        <div class="am-form-group" :class=" {'am-form-error': errors.has('author')}">
+                <input type="text" class="am-form-field" v-model="author" placeholder="作者" v-validate="'required|alpha_dash|min:6|max:10'" data-vv-as="作者" name="author">
+                <div class="am-form-label" v-show="errors.has('author')" v-cloak>{{ errors.first('author') }}</div>  
+         </div>
+
+        <div class="btton" @click="validateBeforeSubmit()">提交</div>
+      </form>
+
+
+      <script>
+      VeeValidate.Validator.localize('zh_CN');
+        Vue.use(VeeValidate);
+
+        VeeValidate.Validator.localize({
+            zh_CN: {
+                messages: {
+                    required: function (name) { return name + '不能为空' },
+                }
+            }
+        })
+      
+
+        var vm = new Vue({
+                el: '#app',
+                data: function () {
+                    return {
+                        username :"",
+                        author: "",
+                        
+
+                    }
+                },
+                methods: {
+                    validateBeforeSubmit() {
+                        this.$validator.validateAll().then((result) => {
+                            if (result) {
+                                alert('ok');
+                                return;
+                            }
+                            alert("请输入完整推荐信息！")
+                        });
+                    }
+                }
+            })
+      </script>
+
+
 
     
 </body>
