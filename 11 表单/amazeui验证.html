@@ -13,18 +13,49 @@
     <script type="text/javascript" src="../js/vue.min.js" ></script>
     <script type="text/javascript" src="../js/vee-validate.min.js" ></script>
     <script type="text/javascript" src="../js/zh_CN.js" ></script>
-    
+    <script src="../js/axios.min.js"></script>
+
+
+<!-- <script>
+        axios.get('http://localhost:5500/result')
+                .then(function (response) {
+                    console.log(response);
+                    
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    
+                });
+</script> -->
+
     <form id = "app" action="" class="am-form">
-        
+
         <div class="am-form-group" :class=" {'am-form-error': errors.has('username')}">
           <input type="text" class="am-form-field" v-model="username" placeholder="用户名" v-validate="'required'" data-vv-as="用户名" name="username">
           <div class="am-form-label"  v-show="errors.has('username')" v-cloak>{{ errors.first('username') }}</div>  
         </div>
 
-        <div class="am-form-group" :class=" {'am-form-error': errors.has('author')}">
+        <div class="am-form-group" :class="errors.has('author') ? 'am-form-error':'am-form-success'" >
                 <input type="text" class="am-form-field" v-model="author" placeholder="作者" v-validate="'required|alpha_dash|min:6|max:10'" data-vv-as="作者" name="author">
                 <div class="am-form-label" v-show="errors.has('author')" v-cloak>{{ errors.first('author') }}</div>  
          </div>
+
+         <div class="am-form-group" :class="errors.has('phone') ? 'am-form-error':'am-form-success'" >
+                <input type="text" class="am-form-field" v-model="phone" placeholder="电话" v-validate="'required|phone'" data-vv-as="电话" name="phone">
+                <div class="am-form-label" v-show="errors.has('phone')" v-cloak>{{ errors.first('phone') }}</div>  
+         </div>
+
+         <div class="am-form-group" :class=" {'am-form-error': errors.has('email')}">
+                <input type="text" class="am-form-field" v-model="email" placeholder="邮箱" v-validate="'email|required|mailcheck'" data-vv-as="邮箱" name="email" >
+                <div class="am-form-label"  v-show="errors.has('email')" v-cloak>{{ errors.first('email') }}</div>  
+         </div>
+
+         <!--失去焦点触发自定义校验-->
+         <div class="am-form-group" :class=" {'am-form-error': errors.has('name')}">
+                <input type="text" class="am-form-field" v-model="name" placeholder="中文名" v-validate="'required|namecheck'" data-vv-as="中文名" name="name" data-vv-validate-on="blur">
+                <div class="am-form-label"  v-show="errors.has('name')" v-cloak>{{ errors.first('name') }}</div>  
+         </div>
+
 
         <div class="btton" @click="validateBeforeSubmit()">提交</div>
       </form>
@@ -41,6 +72,46 @@
                 }
             }
         })
+
+        VeeValidate.Validator.extend('phone', {
+            messages: {
+                zh_CN:field => field + '必须是11位手机号码',
+            },
+            validate: value => {
+                return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+            }
+        });
+
+        VeeValidate.Validator.extend('mailcheck', {
+            getMessage: field => field + '已存在!',
+            validate: value => {
+                return false;
+            }
+        })
+
+        VeeValidate.Validator.extend('namecheck', {
+            getMessage: field => field + '已存在!',
+            validate: value => {
+                console.log("请求namecheck")
+                return axios.post('http://localhost:5500/result', {
+                    firstName: 'a',
+                    lastName: 'b'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    if(response.data.code==1)
+                        return true
+                    else
+                        return false
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    return false;
+                });
+                
+            }
+        });
+      
       
 
         var vm = new Vue({
@@ -48,8 +119,9 @@
                 data: function () {
                     return {
                         username :"",
-                        author: "",
-                        
+                        author : "",
+                        phone : "",
+                        email : "",
 
                     }
                 },
