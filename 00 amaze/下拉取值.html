@@ -41,7 +41,8 @@
 
                 <br/>
                 <select ref="pp" id="bbb" v-model="pru1" data-am-selected="{btnWidth: '40%', btnSize: 'sm', btnStyle: 'secondary'}">
-                        <option 
+                    <option value="0">全部</option>    
+                    <option 
                         :value="item.id" 
                         v-for="(item, index) in allpru1" 
                         :key="index"
