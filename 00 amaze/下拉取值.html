@@ -40,7 +40,7 @@
                 <button @click="getselect">test</button>
 
                 <br/>
-                <select ref="pp" id="bbb" v-model="pru1" @change='changeType' data-am-selected="{btnWidth: '40%', btnSize: 'sm', btnStyle: 'secondary'}">
+                <select ref="pp" id="bbb" v-model="pru1" data-am-selected="{btnWidth: '40%', btnSize: 'sm', btnStyle: 'secondary'}">
                         <option 
                         :value="item.id" 
                         v-for="(item, index) in allpru1" 
@@ -52,6 +52,15 @@
         </div>
         
         <script>
+            //渲染时候回绑数据
+            $(function() {
+                $("#bbb").on('change', function() {
+                    //abc = $(this).val();
+                    console.log("改变了"+$(this).val());
+                    vm.pru1=$(this).val();
+                });
+            });
+
         var vm = new Vue({
             el : "#app",
             data:{
@@ -68,19 +77,17 @@
                     {id:300,name:"王五"},
                 ],
             },
+            mounted() {
+                    console.log("aaaaa");
+                },
             methods:{
                 getselect(){
                     alert(this.pru);
                 },
                 getselect1(){
                     alert(this.pru1);
-                    alert(this.$refs.pp.value);  // vue ref
-                    console.log($('#bbb').val()) //jquery
-                },
-                changeType: function (ele) {
-                    //var optionTxt = $(ele.target).find("option:selected").text();
-                    var optionVal = ele.target.value;
-                    console.log(optionVal)  //change时候取到值，原生input才起作用，模拟出来到div不起作用
+                    //alert(this.$refs.pp.value);  // vue ref
+                    //console.log($('#bbb').val()) //jquery
                 }
             }
         })

@@ -14,6 +14,8 @@
     <script type="text/javascript" src="../js/vee-validate.min.js" ></script>
     <script type="text/javascript" src="../js/zh_CN.js" ></script>
     <script src="../js/axios.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
 
 
 <!-- <script>
@@ -57,11 +59,31 @@
          </div>
 
 
+         <div id="doc-datepicker" class="am-form-group am-input-group am-datepicker-date" data-am-datepicker="{format: 'yyyy-mm-dd', viewMode: 'years'}">
+                <input type="text" class="am-form-field" placeholder="日历组件" disabled v-validate="'required'" data-vv-as="日期" name="riqi" v-model="riqi">
+                <div class="am-form-label"  v-show="errors.has('riqi')" v-cloak>{{ errors.first('riqi') }}</div> 
+       
+                <span class="am-input-group-btn am-datepicker-add-on">
+                  <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
+                </span>
+                
+           </div>
+
+
         <div class="btton" @click="validateBeforeSubmit()">提交</div>
       </form>
 
 
       <script>
+
+        $(function() {
+        $('#doc-datepicker').datepicker().
+            on('changeDate.datepicker.amui', function(event) {
+            console.log(event.date);
+            vm.riqi = event.date;
+            });
+        });
+
       VeeValidate.Validator.localize('zh_CN');
         Vue.use(VeeValidate);
 
@@ -122,8 +144,12 @@
                         author : "",
                         phone : "",
                         email : "",
+                        riqi : "",
 
                     }
+                },
+                mounted() {
+                    console.log("aaaaa");
                 },
                 methods: {
                     validateBeforeSubmit() {
