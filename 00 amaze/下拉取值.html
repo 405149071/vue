@@ -54,13 +54,13 @@
         
         <script>
             //渲染时候回绑数据
-            $(function() {
-                $("#bbb").on('change', function() {
-                    //abc = $(this).val();
-                    console.log("改变了"+$(this).val());
-                    vm.pru1=$(this).val();
-                });
-            });
+            // $(function() {
+            //     $("#bbb").on('change', function() {
+            //         //abc = $(this).val();
+            //         console.log("改变了"+$(this).val());
+            //         vm.pru1=$(this).val();
+            //     });
+            // });
 
         var vm = new Vue({
             el : "#app",
@@ -80,6 +80,14 @@
             },
             mounted() {
                     console.log("aaaaa");
+                    //$(function() {
+                    var that = this;
+                    $("#bbb").on('change', function() {
+                        //abc = $(this).val();
+                        console.log("改变了"+$(this).val());
+                        that.pru1=$(this).val();
+                    });
+            //});
                 },
             methods:{
                 getselect(){
