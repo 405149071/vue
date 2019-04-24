@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/amazeui.css">
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js" ></script>
+    <script type="text/javascript" src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+
+</head>
+<body>
+    
+        <!---amazeui 的下拉框取值问题 -->
+
+            
+        <script type="text/javascript" src="../js/vue.min.js" ></script>
+
+        <select data-am-selected>
+                <option value="a">Apple</option>
+                <option value="b" selected>Banana</option>
+                <option value="o">Orange</option>
+                <option value="m">Mango</option>
+                <option value="d" disabled>禁用鸟</option>
+              </select>
+              <br/>
+        <div id="app">
+
+                
+
+                <select id="aaaa" v-model="pru" data-am-selected>
+                        <option 
+                        :value="item.id" 
+                        v-for="(item, index) in allpru" 
+                        :key="index"
+                        >{{item.name}}</option>
+                </select>
+                
+                <button @click="getselect">test</button>
+
+                <br/>
+                <select ref="pp" id="bbb" v-model="pru1" @change='changeType' data-am-selected="{btnWidth: '40%', btnSize: 'sm', btnStyle: 'secondary'}">
+                        <option 
+                        :value="item.id" 
+                        v-for="(item, index) in allpru1" 
+                        :key="index"
+                        >{{item.name}}</option>
+                </select>
+
+                      <button @click="getselect1">test1</button>
+        </div>
+        
+        <script>
+        var vm = new Vue({
+            el : "#app",
+            data:{
+                pru:"",
+                allpru:[
+                    {id:10,name:"苹果"},
+                    {id:20,name:"香蕉"},
+                    {id:30,name:"苦瓜"},
+                ],
+                pru1:"",
+                allpru1:[
+                    {id:100,name:"章三"},
+                    {id:200,name:"李四"},
+                    {id:300,name:"王五"},
+                ],
+            },
+            methods:{
+                getselect(){
+                    alert(this.pru);
+                },
+                getselect1(){
+                    alert(this.pru1);
+                    alert(this.$refs.pp.value);  // vue ref
+                    console.log($('#bbb').val()) //jquery
+                },
+                changeType: function (ele) {
+                    //var optionTxt = $(ele.target).find("option:selected").text();
+                    var optionVal = ele.target.value;
+                    console.log(optionVal)  //change时候取到值，原生input才起作用，模拟出来到div不起作用
+                }
+            }
+        })
+        vm.pru = 30;
+        vm.pru1= 200;
+        </script>
+
+
+<div id="app1">
+        <select v-model="selected">
+           <option v-for="option in options" :value="option.value">
+             {{ option.text }}
+           </option>
+        </select>
+     </div>
+     <script>
+     new Vue({
+         el: '#app1',
+         data: {
+             selected: 'B',
+             options: [
+                 {text: 'one', value: 'A'},
+                 {text: 'two', value: 'B'},
+                 {text: 'ten', value: 'F'},
+             ]
+         }
+     })
+     </script>
+
+</body>
+</html>
