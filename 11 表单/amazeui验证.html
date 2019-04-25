@@ -63,11 +63,17 @@
                 <input type="text" class="am-form-field" placeholder="日历组件" disabled v-validate="'required'" data-vv-as="日期" name="riqi" v-model="riqi">
                 <div class="am-form-label"  v-show="errors.has('riqi')" v-cloak>{{ errors.first('riqi') }}</div> 
        
+                
                 <span class="am-input-group-btn am-datepicker-add-on">
                   <button class="am-btn am-btn-default" type="button"><span class="am-icon-calendar"></span> </button>
                 </span>
                 
            </div>
+
+            <p>
+            <input type="text" v-model="riqi2" class="am-form-field" placeholder="日历组件" data-am-datepicker readonly required />
+            </p>
+            <div class="btton" @click="changetime">改变时间</button>
 
 
         <div class="btton" @click="validateBeforeSubmit()">提交</div>
@@ -145,6 +151,7 @@
                         phone : "",
                         email : "",
                         riqi : "",
+                        riqi2 : "2019-08-08"
 
                     }
                 },
@@ -160,6 +167,9 @@
                             }
                             alert("请输入完整推荐信息！")
                         });
+                    },
+                    changetime(){
+                        this.riqi2 = '2020-10-10'
                     }
                 }
             })
