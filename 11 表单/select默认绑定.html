@@ -28,18 +28,23 @@
                     options:[]
                 },
                 created(){
-                    var that = this
-                    axios.get('http://localhost:5500/citys')
-                    .then(function (res) {
-                        console.log(res);
-                        that.options = res.data;
-                        // that.selectedOption = that.options[0].cityCode;
-                        that.selects.select1 = that.options[0].cityCode;
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                    })
+                    this.getselect()
 
+                },
+                methods:{
+                    getselect(){
+                        var that = this
+                        axios.get('http://localhost:5500/citys')
+                        .then(function (res) {
+                            console.log(res);
+                            that.options = res.data;
+                            // that.selectedOption = that.options[0].cityCode;
+                            that.selects.select1 = that.options[0].cityCode;
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                        })
+                    }
                 }
             })
             

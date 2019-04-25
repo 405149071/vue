@@ -54,13 +54,13 @@
         
         <script>
             //渲染时候回绑数据
-            // $(function() {
-            //     $("#bbb").on('change', function() {
-            //         //abc = $(this).val();
-            //         console.log("改变了"+$(this).val());
-            //         vm.pru1=$(this).val();
-            //     });
-            // });
+            $(function() {
+                $("#bbb").on('change', function() {
+                    //abc = $(this).val();
+                    console.log("改变了"+$(this).val());
+                    vm.pru1=$(this).val();
+                });
+            });
 
         var vm = new Vue({
             el : "#app",
@@ -78,27 +78,30 @@
                     {id:300,name:"王五"},
                 ],
             },
-            mounted() {
-                    console.log("aaaaa");
-                    //$(function() {
-                    var that = this;
-                    $("#bbb").on('change', function() {
-                        //abc = $(this).val();
-                        console.log("改变了"+$(this).val());
-                        that.pru1=$(this).val();
-                    });
-            //});
-                },
             methods:{
                 getselect(){
                     alert(this.pru);
                 },
                 getselect1(){
-                    alert(this.pru1);
+                    //alert(this.pru1);
+                    this.pru1 = 300;
+                    setTimeout(function(){
+                            $("#bbb").trigger('changed.selected.amui')
+                        },1000)
                     //alert(this.$refs.pp.value);  // vue ref
                     //console.log($('#bbb').val()) //jquery
                 }
-            }
+            },
+            watch: {
+                pru1:function(val, oldVal){
+                    console.log("pru1监听了 新：",val," oldval",oldVal)
+                    // if(val != oldVal){
+                        // setTimeout(function(){
+                        //     $("#bbb").trigger('changed.selected.amui')
+                        // },10000)
+                    // }
+                }
+            },
         })
         vm.pru = 30;
         vm.pru1= 200;
