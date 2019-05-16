@@ -1,0 +1,153 @@
+<html lang="en"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        
+            <div id="app">
+                    
+                    规格:
+                    <div><input type="checkbox">
+                        颜色 <input type="button" value="添加"> <div><input type="checkbox"> <input type="text"></div><div><input type="checkbox"> <input type="text"></div></div><div><input type="checkbox">
+                        功率 <input type="button" value="添加"> </div> <input type="button" value="查看"> <input type="button" value="生成表格"></div>
+    
+           
+                  
+                
+                <script type="text/javascript">
+                // 笛卡尔乘积
+                function cartesianProductOf() {
+                    return Array.prototype.reduce.call(arguments,    function(a, b) {
+                    var ret = [];
+                        a.forEach(function(a) {
+                        b.forEach(function(b) {
+                        ret.push(a.concat([b]));
+                    });
+                    });
+                    return ret;
+                    }, [[]]);
+                }
+            
+    
+                    var data = {
+                        specs_type_all:[
+                            {"code":"color",
+                                "name":"颜色",
+                                "checked":false,
+                                "list":[{
+                                    "name":"红色",
+                                    "checked":true
+                                    },
+                                    {
+                                    "name":"白色",
+                                    "checked":true
+                                    }]
+                            },
+                            {"code":"wa","name":"功率","checked":false,"list":[]}],
+                        specs_type_checked:[{"code":"color","name":"颜色"}],
+                                       
+                    }
+                    
+                    var vm1 = new Vue({
+                        el:"#app",
+                        data:data,
+                        computed:{
+                            spec_all_checked:function(){
+                                // return [
+                                //     ['a1', 'a2'],
+                                //     ['b1', 'b2', 'b3',]
+                                // ];
+                                var arr = [];
+                                for(i = 0; i<this.specs_type_all.length;i++){
+                                    var spec_type =  this.specs_type_all[i]
+                                    var tmp = [];
+                                    for(j=0;j<spec_type.list.length;j++){
+                                        if(spec_type.list[j].checked)
+                                            tmp[j]=spec_type.list[j].name;
+                                    }
+                                    // console.log(tmp);
+                                    //console.log(tmp.length);
+                                    if(tmp.length>0)
+                                        arr[i]=tmp;
+                                    
+                                }
+                                //console.log(arr);
+                                return arr;
+                            },
+                            tables:function(){
+                                var arr = this.spec_all_checked;
+                                console.log(arr,"11111");
+                                str = "";
+                                for(i =0 ;i<arr.length;i++){
+                                    str += JSON.stringify(arr[i])+","; 
+                                }
+                                tablebegin= eval("cartesianProductOf("+str+")");
+                                // console.log($tablebegin)  
+                                // 生成表格数据
+                                for(i=0;i<tablebegin.length;i++){
+                                    tablebegin[i].push(""); // 加个
+                                    tablebegin[i].push(""); // 加个
+                                    tablebegin[i].push(""); // 加个
+                                }
+                                console.log(tablebegin,2222);
+                                return tablebegin;
+                            }
+                        },
+                        methods: {
+                            addType:function(index){
+                                var tmp = {
+                                    "name":"",
+                                    "checked":false
+                                    }
+                                var count = this.specs_type_all[index].list.length;
+                                //alert(count);
+                                this.specs_type_all[index].list.splice(count,0,tmp)
+                            },
+                            list:function(){ //查看值
+                                var tmp = this.specs_type_all[0].list[2].name;
+                                alert(tmp);
+                            },
+                            gen:function(){
+                                // var arr = [
+                                //     ['a1', 'a2'],
+                                //     ['b1', 'b2', 'b3',]
+                                // ];
+                                // var arr = this.spec_all_checked;
+                                // //console.log(arr);
+                                // str = "";
+                                // for(i =0 ;i<arr.length;i++){
+                                //     str += JSON.stringify(arr[i])+","; 
+                                // }
+                                // $eee = eval("cartesianProductOf("+str+")");
+                                // //console.log($eee)  
+    
+    
+    
+                            }
+                        },     
+                    })
+                    
+                </script>
+    
+    
+    <script>
+            // var arr = [
+            //               ['a1', 'a2'],
+            //                ['b1', 'b2']
+            //          ];
+            //          for(i=0;i<arr.length;i++){
+            //                         arr[i].push("aa"); // 加个
+            //                         arr[i].push("bb"); // 加个
+            //                         arr[i].push("cc"); // 加个
+            //            }
+            //                     console.log(arr[0]);
+    
+    
+            </script>
+    
+    
+    
+    </body></html>
