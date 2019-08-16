@@ -1,40 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
 
-        <script type="text/javascript" src="../js/vue.min.js" ></script>
-        <script type="text/javascript" src="../js/axios.min.js"></script>
-    
-        <div id="app">
-                <select v-model="selects.select1">
-                    <option v-for="option in options" :value="option.cityCode" >{{option.city}}</option>
-                </select>
-            </div>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+    <script type="text/javascript" src="../js/axios.min.js"></script>
 
-            <script type="text/javascript">
-            var vm = new Vue({
-                el:"#app",
-                data:{
-                    selects:{
-                        select1:""
+    <div id="app">
+        <select v-model="selects.select1">
+            <option v-for="option in options" :value="option.cityCode">{{option.city}}</option>
+        </select>
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                selects: {
+                    select1: "1"
+                },
+                //selectedOption:"",
+                options: [{
+                        "cityCode": 1,
+                        "city": "北京"
                     },
-                    //selectedOption:"",
-                    options:[]
-                },
-                created(){
-                    this.getselect()
+                    {
+                        "cityCode": 2,
+                        "city": "上海"
+                    },
+                    {
+                        "cityCode": 3,
+                        "city": "天津"
+                    },
+                    {
+                        "cityCode": 4,
+                        "city": "重庆"
+                    }
+                ]
+            },
+            created() {
+                this.getselect()
 
-                },
-                methods:{
-                    getselect(){
-                        var that = this
-                        axios.get('http://localhost:5500/citys')
+            },
+            methods: {
+                getselect() {
+                    var that = this
+                    axios.get('http://localhost:5500/citys')
                         .then(function (res) {
                             console.log(res);
                             that.options = res.data;
@@ -44,14 +62,13 @@
                         .catch(function (err) {
                             console.log(err);
                         })
-                    }
                 }
-            })
-            
-            </script>
+            }
+        })
+    </script>
 
 
-<!--
+    <!--
 
 [
   {
@@ -75,4 +92,5 @@
 -->
 
 </body>
+
 </html>

@@ -1,85 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
 
-<style>
-    .red {
-        width: 400px;
-        height: 400px;
-        background-color: red;
-    }
-    .blue {
-        width: 200px;
-        height: 200px;
-        background-color: blue;
-    }
-</style>
+    <style>
+        .red {
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        }
+
+        .blue {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+    </style>
     <div id="app">
         <h2>绑定监听</h2>
-        <button @click = "btnClick">无参数绑定</button>
-        <button @click = "btnClick2('参数')">传参</button>
-        <button @click = "btnClick3">使用event，默认就传</button>
-        <button @click = "btnClick4('abcd',$event)">使用event，并且传入参数</button>
+        <button @click="btnClick">无参数绑定</button>
+        <button @click="btnClick2('参数')">传参</button>
+        <button :data-aid="sex" aid="888" @click="btnClick3">使用event，默认就传</button>
+        <button @click="btnClick4('abcd',$event)">使用event，并且传入参数</button>
         <h2>事件修饰符，阻止冒泡</h2>
 
-        <div id="outer" class = "red" @click = "outer">
+        <div id="outer" class="red" @click="outer">
             <!--阻止冒泡事件-->
-            <div id="inner" class = "blue" @click.stop = "inner">
+            <div id="inner" class="blue" @click.stop="inner">
 
             </div>
 
         </div>
         <!---阻止默认事件-->
-        <a href="http://www.baidu.com" @click= "gobaidu1">老方法阻止默认事件去百度</a>
-        <a href="http://www.baidu.com" @click.prevent = "gobaidu">去百度</a>
+        <a href="http://www.baidu.com" @click="gobaidu1">老方法阻止默认事件去百度</a>
+        <a href="http://www.baidu.com" @click.prevent="gobaidu">去百度</a>
 
         <br>
         <h2>按键</h2>
-        <input type="text" @keyup="testkeycode"> //老的方法绑定按键 
+        <input type="text" @keyup="testkeycode"> //老的方法绑定按键
         <input type="text" @keyup.13="testkeycode"> //
         <input type="text" @keyup.enter="testkeycode"> //
     </div>
 
-   <script src="../js/vue.js"></script>
-   <script>
+    <script src="../js/vue.js"></script>
+    <script>
         var vm = new Vue({
-            el : "#app",
-            data : {
-                btnClick2(para){  
+            el: "#app",
+            data: {
+                sex: "男",
+                btnClick2(para) {
                     alert(para)
                 }
             },
-            methods :{
-                btnClick(){  //事件写在data里和methods里都可以被触发
+            methods: {
+                btnClick() { //事件写在data里和methods里都可以被触发
                     alert('test1')
                 },
-                btnClick3(event){  
+                btnClick3(event) {
                     alert(event.target.innerHTML)
+                    // console.log(event.srcElement)
+                    alert(event.srcElement.dataset.aid)
+                    alert(event.srcElement.attributes["aid"].value)
+
+
                 },
-                btnClick4(para,event){  
+                btnClick4(para, event) {
                     alert(para + ' ' + event.target.innerHTML)
                 },
-                outer(){
+                outer() {
                     alert("outer")
                 },
-                inner(){
+                inner() {
                     alert("inner")
                 },
-                gobaidu(){
+                gobaidu() {
                     alert('点击了');
                 },
-                gobaidu1(event){
+                gobaidu1(event) {
                     event.preventDefault();
                     alert('点击了')
                 },
-                testkeycode(event){
-                    if(event.keyCode == 13){
+                testkeycode(event) {
+                    if (event.keyCode == 13) {
                         alert(event.target.value)
                     }
                 }
@@ -88,4 +97,5 @@
     </script>
 
 </body>
+
 </html>

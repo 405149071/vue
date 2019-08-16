@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="vue.js"></script>
+    <script src="../js/vue.js"></script>
 </head>
 <body>
 <form action="aaa">
@@ -22,7 +22,7 @@
         <span></span>
     </p>
     <p>
-        <input type="checkbox" v-modal="check" @click="checkagree()">同意"服务条款"和"隐私权相关政策"
+        <input type="checkbox" v-model="check" @click="checkagree()">同意"服务条款"和"隐私权相关政策"
         <span>{{msgagree}}</span>
     </p>
     <hr>
@@ -114,7 +114,7 @@
                     event.preventDefault();
                 }
             }
- x
+
         }
     })
 </script>

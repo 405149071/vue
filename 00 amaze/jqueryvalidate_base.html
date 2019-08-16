@@ -18,6 +18,11 @@
   <form class="cmxform" id="signupForm" method="get" action="">
     <fieldset>
       <legend>验证完整的表单</legend>
+      <!-- <div class="am-form-group am-form-error am-form-icon am-form-feedback">
+          <input type="text" id="doc-ipt-error" class="am-form-field">
+          <label class="am-form-label" for="doc-ipt-error">验证失败</label>
+        </div> -->
+
       <p>
         <!--<label for="firstname">名字</label>-->
         <input id="firstname" name="firstname" type="text">
@@ -133,7 +138,7 @@
 
 function formReset()
     {
-      $("#signupForm")[0].reset()
+      //$("#signupForm")[0].reset()
       validator.resetForm()
     }
 
