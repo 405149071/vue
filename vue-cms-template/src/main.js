@@ -14,6 +14,7 @@ Vue.use(VueRouter)
 
 // // 导入 MUI 的样式
 import './lib/mui/css/mui.min.css'
+import './lib/mui/css/icons-extra.css'
 // // 导入扩展图标样式
 // import './lib/mui/css/icons-extra.css'
 
