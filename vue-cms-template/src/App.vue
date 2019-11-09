@@ -3,14 +3,15 @@
     <!-- header -->
     <mt-header fixed title="黑马程序员"></mt-header>
 
-    <h1>这是 App 组件</h1>
+    <!-- <h1>这是 App 组件</h1> -->
+		<router-view></router-view>
 
     <nav class="mui-bar mui-bar-tab">
 			<router-link class="mui-tab-item" to="/home">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</router-link>
-			<router-link class="mui-tab-item" to="/memeber">
+			<router-link class="mui-tab-item" to="/member">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">会员</span>
 			</router-link>
