@@ -21,8 +21,10 @@ import './lib/mui/css/icons-extra.css'
 // 1.3 导入自己的 router.js 路由模块
 import router from './router.js'
 
-import { Header } from 'mint-ui';
+import { Header,Swipe, SwipeItem } from 'mint-ui';
 Vue.component(Header.name, Header);
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 
 // 导入 App 根组件
 import app from './App.vue'
