@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!---
+        常用指令：
+        v-text: 更新元素的textcontent
+        v-html:更新元素的innerhtml
+        v-if:
+        v-else:
+        v-show
+        v-for:
+        v-on:
+        v-bind
+        v-model:
+        ref:为某个元素注册一个唯一表示，vue对象通过¥els属性访问这个元素
+        v-cloak: 防止闪现表达式
+
+    -->
+    <!---v-cloak指令使用-->
+    <style>
+        [v-cloak]{
+            display:none;
+        }
+    </style>
+
+    <div id="app">
+        <!---ref指令-->
+        <p ref="pp">iduotel。com</p>
+        <button @click="hint">提示</button>
+        <!---防止闪现-->
+        <p v-text="msg"></p>
+        <p v-cloak>{{msg}}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+            
+    <script>
+        alert("---");
+        new Vue({
+            el : "#app",
+            data : {
+                msg : "尚硅谷"
+            },
+            methods:{
+                hint(){
+                    alert(this.$refs.pp.textContent)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

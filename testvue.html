@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hello vue</title>
+</head>
+<body>
+    
+    <div id="app">
+        <!--变量绑定-->
+        <input type="text" v-model="message">
+        <p> {{message}} </p>
+        <!--强制绑定-->
+        <img v-bind:src="imgurl" />
+        <img :src="imgurl" />
+        <!---绑定事件-->
+        <button v-on:click="myclick">按钮1</button>
+        <button @click="myclick">按钮2</button>
+        
+    </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                message : "Hello,Vue.js!",
+                imgurl : "img/vue.png"
+            },
+            methods : {
+                myclick(){
+                    alert('绑定了事件');
+                }
+            }
+        })
+        vm.message = '你好呀';
+    </script>
+
+
+</body>
+</html>
+
+
+

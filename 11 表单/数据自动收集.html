@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <!---
+    1.vue对象的生命周期
+    1） 初始化显示
+    beforeCreate()
+    created()
+    beforeMount()
+    mounted()
+    2) 更新显示 this.xxx = value
+    beforeUpdate()
+    updated()
+    3) 销毁vue实例 vm.$destroy()
+    beforeDestroy()
+    destroyed()
+
+    2. 常用的生命周期方法
+    mounted():发送ajax请求,启动定时器等异步方法
+    beforeDestroy(): 做收尾工作，如：清洗定时器
+
+    
+    -->
+    <div id="app">
+        <form action="">
+            姓名： <input v-model="userName" type="text" /><br>
+            密码:  <input v-model="pwd" type="text" /><br>
+            性别: 男：<input type="radio" value="男" v-model="sex"> 
+                 女：<input type="radio" value="女" v-model="sex"> <br>
+            爱好：篮球<input type="checkbox" value="blasketball" v-model="likes">
+                 足球<input type="checkbox" value="football" v-model="likes">
+                 乒乓球<input type="checkbox" value="pingbangball" v-model="likes"><br>
+            城市: <select v-model="city">
+                    <option value="">请选择</option>
+                    <option :value="item.id" v-for="(item, index) in allcitys" :key="index">{{item.name}}</option>
+                  </select><br>
+            介绍： <textarea cols="30" rows="10" v-model="desc"></textarea><br>
+    </form>
+      <!--button放在表单外边，不用写prevent来阻止默认事件提交-->      
+    <button @click = "collectData">收集数据</button>
+            
+
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el : "#app",
+            data : {
+                //提交的数据
+                userName : "",
+                pwd : "",
+                sex : "男",
+                likes : ["football"],
+                city : "2",
+                desc : "",
+                //显示的数据
+                allcitys:[
+                    {id:1,name:'BJ'},
+                    {id:2,name:'SH'},
+                    {id:3,name:'GZ'},
+                ]
+
+            },
+            methods : {
+                collectData (){
+                    console.log('开始收集数据')
+                    console.log(this.userName,this.pwd,this.sex,this.likes,this.city,this.desc)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

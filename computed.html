@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!---
+1. 计算属性
+在computed属性对象中定义计算属性的方法
+在页面中使用{{方法名}}来显示计算的结果
+
+2.监视属性：
+通过vm对象的$watch()或watch配置来监视指定的属性
+当属性变化时，回调函数自动调用，在函数内部进行计算
+
+3.计算属性高级
+通过getter/sertter实现对属性数据对显示和监视
+计算属性存在缓存，多次读取只执行一次getter计算
+
+
+-->
+
+    <div id="app">
+        姓：<input type="text" placeholder="firstname" v-model="firstname"><br/>
+        名：<input type="text" placeholder="lastname" v-model="lastname"><br/>
+        姓名1(单向):<input type="text" placeholder="fullname1" v-model="fullname1"><br/>
+        姓名2(单向):<input type="text" placeholder="fullname2" v-model="fullname2"><br/>
+        姓名3(双向):<input type="text" placeholder="fullname3" v-model = "fullname3"><br/>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+            <script type="text/javascript">
+                var vm = new Vue({
+                    el:"#app",
+                    data:{
+                        firstname:"A",
+                        lastname:"B",
+                        fullname2 : "a b c d"
+                    },
+                    computed:{
+                        // 执行时间， 1初始化显示 2，相关属性发生改变
+                        fullname1(){
+                            return this.firstname + ' ' + this.lastname
+                        },
+                        //双向绑定的数据
+                        fullname3:{
+                            // 回调函数，计算并返回当前属性的值
+                            get(){
+                                return this.firstname + ' ' + this.lastname
+                            },
+                            set(value){ // value 是fullname3最新属性值
+                                const names = value.split(' ')
+                                this.firstname = names[0]
+                                this.lastname = names[1]
+                            }
+                        }
+                    },
+                    // 监视属性变化
+                    watch : { // 配置监视
+                        firstname : function(value){
+                            console.log(this)
+                            this.fullname1 =  value + ' ' + this.lastname
+                        }
+                    }
+                })
+
+                vm.$watch('lastname',function(value){
+                    console.log(this)
+                    this.fullname1 =  this.firstname + ' ' + value
+                })
+            </script>
+</body>
+</html>

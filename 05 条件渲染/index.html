@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        v-if
+        v-else
+        v-show
+
+        不同：
+        if else 是没有具体元素
+        v-show 只是display:none不显示而已
+    -->
+
+    <div id="app">
+        <p v-if="ok">成功了</p>
+        <p v-else>失败了</p>
+
+        <p v-show="ok">表白成功了</p>
+        <p v-show="!ok">表白失败了</p>
+        <button @click = "ok=!ok">切换</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:"#app",
+            data : {
+                ok : true
+            }
+        })
+    </script>
+
+</body>
+</html>

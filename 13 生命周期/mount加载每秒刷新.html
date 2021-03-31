@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+            <button @click = "destroyVM">destroy vm</button>
+            <p v-show="isShow">清明节</p>
+    </div>
+    
+    <script src="../js/vue.js"></script>
+    <script>
+    new Vue({
+        el : "#app",
+        data :{
+            isShow:true
+        },
+        // 初始化阶段
+        beforeCreate() {
+            console.log("beforeCreate")
+        },
+
+        created() {
+            console.log("created")
+        },
+        beforeMount() {
+            console.log("beforeMount")
+        },
+
+        mounted() {
+            console.log("mounted")
+            //初始化显示之后立即调用 1次
+            this.intervalID = setInterval(() => {
+                console.log("------------")
+                this.isShow = !this.isShow
+            }, 1000);
+        },
+        // 更新阶段
+        beforeUpdate() {
+            console.log("beforeUpdate")
+        },
+
+        updated() {
+            console.log("updated")
+        },
+
+        // 死亡阶段
+        beforeDestroy() { // 死亡之前调用1次
+            console.log("beforeDestroy")
+            // 清除定时器 避免内存泄露
+            clearInterval(this.intervalID)
+        },
+        destroyed() {
+            console.log("destroyed")
+        },
+
+        methods : {
+            destroyVM (){
+                this.$destroy()
+            }
+        }
+    })
+    </script>
+
+</body>
+</html>
