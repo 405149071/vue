@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello</title>
+  <script src="./vue3.2.3.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>{{revertStr}}</h1>
+    </div>
+</body>
+
+<script>
+const app = {
+    data(){
+        return {
+            msg:'hello 你好',
+            color:"green",
+            id:"id1"
+        }
+    },
+    computed:{
+        revertStr: function(){
+            return this.msg.split('').reverse().join('')
+        }
+    }
+    
+}
+Vue.createApp(app).mount("#root")
+</script>
+
+<style>
+    
+    #id1 {
+        background-color: green;
+    }
+
+    #id2 {
+        background-color: red;
+    }
+</style>
+
+
+</html>
