@@ -13,6 +13,8 @@
         <h1>{{msg.split('')}}</h1>
         <h1>{{msg.split('').reverse()}}</h1>
         <h1>{{msg.split('').reverse().join('')}}</h1>
+        <h1>{{color=="green"?"开心":"难过"}}</h1>
+        <h1 :id="id">afaf</h1>
     </div>
 </body>
 
@@ -20,9 +22,24 @@
 Vue.createApp({
     data(){
         return {
-            msg:'hello 你好'
+            msg:'hello 你好',
+            color:"green",
+            id:"id1"
         }
     }
 }).mount("#root")
 </script>
+
+<style>
+    
+    #id1 {
+        background-color: green;
+    }
+
+    #id2 {
+        background-color: red;
+    }
+</style>
+
+
 </html>
