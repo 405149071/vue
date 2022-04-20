@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello</title>
+  <script src="./vue3.2.3.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+<script>
+Vue.createApp({
+    data(){
+        return {
+            content:1
+        }
+    },
+    mounted(){ // 生命周期函数，后续会专门说明
+        setInterval(() => { // es6中的箭头函数
+            this.content += 1 // this指向Vue实例
+        },1000)
+    },
+    template:'<div>{{content}}</div>'
+}).mount("#root")
+</script>
+</html>

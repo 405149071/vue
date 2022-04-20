@@ -5,9 +5,46 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <!-- <script src="https://unpkg.com/vue@next"></script> -->
+  <!-- <script src="https://unpkg.com/vue-router@next"></script>
+  <script src="https://unpkg.com/vuex@next"></script>
+  // element-plus 引入样式
+  <link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css">
+  // element-plus 引入组件库
+  <script src="https://unpkg.com/element-plus/lib/index.full.js"></script>
+  // Ant Design Vue 引入样式
+  <link rel="stylesheet" href="js/antdv/antd.css">
+  // Ant Design Vue 引入组件库
+  <script src="js/antdv/antd.js"></script>
+  // Vant 引入样式文件
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@next/lib/index.css"/>
+  // Vant 引入组件库
+  <script src="https://cdn.jsdelivr.net/npm/vant@next/lib/vant.min.js"></script> -->
+
+      <script src="./vue3.2.3.js"></script>
 </head>
 <body>
   
-  
+  <div id="counter">
+    <h1>counter:{{ num }}</h1>
+  </div>
 </body>
+
+<script>
+  const Counter = {
+    /*data(){
+      return {
+        num:0
+      }
+    }*/
+    data: function(){
+      return {
+        num:0
+      }
+    }
+  }
+
+  Vue.createApp(Counter).mount("#counter")
+
+</script>
 </html>
