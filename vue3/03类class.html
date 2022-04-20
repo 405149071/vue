@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello</title>
+  <script src="./vue3.2.3.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 1，普通写法 -->
+        <h1 :class="classname">abc</h1>
+        <!--  2 放置对象-->
+        <h1 :class="{active:isActive}">abc</h1>
+        <!-- 3,放置数组 -->
+        <h1 :class="['abc','def']">abcdef</h1>
+        <h1 :class="arr">abcdef</h1>
+        <!-- 4,对象和数组组合 -->
+        <h1 :class="[classname,{active:isActive}]">abc</h1>
+        <h1 :class="[arr,{active:isActive}]">abc</h1>
+        <button @click="toggle">切换</button>
+    </div>
+</body>
+
+<script>
+Vue.createApp({
+    data(){
+        return {
+            classname:'id1',
+            isActive:true,
+            arr:['a','b','c','d']
+        }
+    },
+    methods:{
+        toggle(){
+            this.classname = 'id2'
+            this.isActive = !this.isActive
+            this.arr.pop()
+        }
+    }
+}).mount("#root")
+</script>
+
+<style>
+    
+    #id1 {
+        background-color: green;
+    }
+
+    #id2 {
+        background-color: red;
+    }
+
+    .id1 {
+        background-color: purple;
+    }
+
+    .id2 {
+        background-color: pink;
+    }
+</style>
+
+
+</html>
