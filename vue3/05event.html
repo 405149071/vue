@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello</title>
+  <script src="./vue3.2.3.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1 @click="add">{{num}}</h1>
+        <h1 @click="add1">{{num}}</h1>
+        <h1 @click="add2(10,$event)">{{num}}</h1>
+        <h1 @click="add3">{{num}}</h1>
+        <!-- 绑定多个方法  需要传event-->
+        <h1 @click="add($event),add3($event)">{{num}}</h1>
+        <!-- 只点击一次起作用 -->
+        <!-- 事件修饰符
+            阻止事件冒泡： .stop
+            阻止默认事件:  .prevent
+            只出发一次: .once
+        -->
+        <h1 @click.once="add4">{{num}}</h1>
+        <!-- 按键修饰符 -->
+        <!-- 
+            enter/tab/delete/esc/space/up/down/left/right
+            系统修饰符
+            .ctrl/.alt/.shift/.meta
+            鼠标按键修饰符
+            .left/.right/.middle
+         -->
+        <input type="text" @keydown.enter="search">
+    </div>
+</body>
+
+<script>
+Vue.createApp({
+    data(){
+        return {
+            num : 0,
+        }
+    },
+    methods:{
+        // 写法1
+        add(){
+            this.num += 2
+        },
+        // 写法2
+        add1: function(){
+            this.num += 3
+        },
+        // event 的传递
+        add2(num,event){
+            console.log(event)
+            this.num += num
+        },
+        // 默认传递的event，html里可以不写event
+        add3(event){
+            console.log(event)
+            this.num += 1
+        },
+        add4(){
+            this.num += 40
+        },
+        search(){
+            console.log('search========')
+        }
+    }
+}).mount("#root")
+</script>
+
+</html>
